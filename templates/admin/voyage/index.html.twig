@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Voyage index
+{% endblock %}
+
+{% block body %}
+    <div class="container pt-3">
+        <h1>Voyages</h1>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Titre</th>
+                    <th>Destination</th>
+                    {# <th>Description</th> #}
+                    <th>Note</th>
+                    <th>Date de départ</th>
+                    {# <th>Id</th> #}
+                    {# <th>Création</th> #}
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for voyage in voyages %}
+                    <tr>
+                        <td>{{ voyage.titre }}</td>
+                        <td>{{ voyage.destination.ville }} / {{ voyage.destination.pays.nom }}</td>
+                        {# <td>{{ voyage.description }}</td> #}
+                        <td>{{ voyage.note }}</td>
+                        <td>{{ voyage.dateDepart ? voyage.dateDepart|date('d-m-Y') : '' }}</td>
+                        {# <td>{{ voyage.id }}</td> #}
+                        {# <td>{{ voyage.created ? voyage.created|date('d-m-Y') : '' }}</td> #}
+                        <td>
+                            <a href="{{ path('admin_voyage_show', {'id': voyage.id}) }}">Détails</a>
+                            <a href="{{ path('admin_voyage_edit', {'id': voyage.id}) }}">Modifier</a>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="7">Aucun voyage trouvé</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <a href="{{ path('admin_voyage_new') }}">Créer un nouveau voyage</a>
+    </div>
+{% endblock %}

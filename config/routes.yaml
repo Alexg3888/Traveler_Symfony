@@ -1,0 +1,20 @@
+#index:
+#    path: /
+#    controller: App\Controller\DefaultController::index
+
+# config/routes.yaml
+
+# the "app_lucky_number" route name is not important yet
+
+# app_lucky_number:
+#     path: /lucky/number
+#     controller: App\Controller\LuckyController::number
+
+admin:
+    resource: ../src/Controller/Admin
+    prefix: /admin
+    name_prefix: admin_
+    type: annotation
+
+_liip_imagine:
+    resource: "@LiipImagineBundle/Resources/config/routing.yaml" 

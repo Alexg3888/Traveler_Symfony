@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}User index
+{% endblock %}
+
+{% block body %}
+    <div class="container pt-3">
+        <h1>Utilisateurs</h1>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Login</th>
+                    <th>Roles</th>
+                    <th>Mot de passe</th>
+                    {# <th>Id</th> #}
+                    <th>Création</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for user in users %}
+                    <tr>
+                        <td>{{ user.login }}</td>
+                        <td>
+                            {{ include('admin/user/roles_pills.html.twig') }}
+                        </td>
+                        <td>{{ user.password }}</td>
+                        {# <td>{{ user.id }}</td> #}
+                        <td>{{ user.created ? user.created|date('d-m-Y') : '' }}</td>
+                        <td>
+                            <a href="{{ path('admin_user_show', {'id': user.id}) }}">Détails</a>
+                            <a href="{{ path('admin_user_edit', {'id': user.id}) }}">Modifier</a>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="6">Pas d'utilisateur trouvé</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <a href="{{ path('admin_user_new') }}" class="btn btn-secondary mr-3">Créer un nouvel utilisateur</a>
+    </div>
+{% endblock %}
